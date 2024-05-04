@@ -12,31 +12,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class BootStrapData implements CommandLineRunner {
 
-    private final WriterRepository writersRepository;
+  private final WriterRepository writersRepository;
 
-    private final BookRepository bookRepository;
-    private final PublisherRepository publisherRepository;
+  private final BookRepository bookRepository;
+  private final PublisherRepository publisherRepository;
 
-    public BootStrapData(WriterRepository writersRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
-        this.bookRepository = bookRepository;
-        this.writersRepository = writersRepository;
-        this.publisherRepository = publisherRepository;
-    }
+  public BootStrapData(
+      WriterRepository writersRepository,
+      BookRepository bookRepository,
+      PublisherRepository publisherRepository) {
+    this.bookRepository = bookRepository;
+    this.writersRepository = writersRepository;
+    this.publisherRepository = publisherRepository;
+  }
 
-    @Override
-    public void run(String... args) throws Exception {
-        Writer writer = new Writer("Joseph", "Heller", 43);
-        Book book = new Book(1234, "Catch 22");
-        writer.getBooks().add(book);
-        book.getWriters().add(writer);
-        Publisher publisher = new Publisher("gosho");
-        publisher.getBooks().add(book);
-        book.setPublisher(publisher);
-        writersRepository.save(writer);
-        publisherRepository.save(publisher);
-        bookRepository.save(book);
-        System.out.println("Books Data: " + bookRepository.count());
-        System.out.println("Books Data: " + publisherRepository.count());
-
-    }
+  @Override
+  public void run(String... args) throws Exception {
+    Writer writer = new Writer("Joseph", "Heller", 43);
+    Book book = new Book(1234, "Catch 22");
+    writer.getBooks().add(book);
+    book.getWriters().add(writer);
+    Publisher publisher = new Publisher("gosho");
+    publisher.getBooks().add(book);
+    book.setPublisher(publisher);
+    writersRepository.save(writer);
+    publisherRepository.save(publisher);
+    bookRepository.save(book);
+    System.out.println("Books Data: " + bookRepository.count());
+    System.out.println("Books Data: " + publisherRepository.count());
+  }
 }

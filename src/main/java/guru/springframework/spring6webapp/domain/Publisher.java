@@ -1,67 +1,70 @@
 package guru.springframework.spring6webapp.domain;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 @Entity
 public class Publisher {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
-    @OneToMany(mappedBy = "publisher")
-    private Set<Book> books;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    public Publisher() {
-        this.name = "";
-        this.books = new HashSet<>();
-    }
-    public Publisher(String name) {
-        this.name = name;
-        this.books = new HashSet<>();
-    }
+  private String name;
 
-    public Set<Book> getBooks() {
-        return books;
-    }
+  @OneToMany(mappedBy = "publisher")
+  private Set<Book> books;
 
-    public String getName() {
-        return name;
-    }
+  public Publisher() {
+    this.name = "";
+    this.books = new HashSet<>();
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Publisher(String name) {
+    this.name = name;
+    this.books = new HashSet<>();
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Set<Book> getBooks() {
+    return books;
+  }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Publisher publisher = (Publisher) o;
-        return Objects.equals(id, publisher.id);
-    }
+  public Long getId() {
+    return id;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
-                '}';
-    }
+  public void setBooks(Set<Book> books) {
+    this.books = books;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Publisher publisher = (Publisher) o;
+    return Objects.equals(id, publisher.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
+
+  @Override
+  public String toString() {
+    return "Publisher{" + "id=" + id + ", name='" + name + '\'' + ", books=" + books + '}';
+  }
 }
